@@ -1,0 +1,1456 @@
+@import "mixin";
+
+body {
+  font-size: 16px;
+  font-family: "Noto Serif JP", "Crimson Text", serif;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.scroll{
+  background-color: #f2f8f6b4;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 6.5%;
+  right: 2%;
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  border: none;
+  transition: opacity 1s;
+  visibility: hidden;
+  opacity: 0;
+
+    &.is-fadein {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @include media960 {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+
+// header
+.header {
+  height: 60px;
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  z-index: 1;
+
+  .animation1::before {
+    content: "";
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    animation: 2s slidein 0.4s forwards;
+  }
+
+  @keyframes slidein {
+    0% {
+      width: 100%;
+    }
+
+    100% {
+      width: 0;
+    }
+  }
+
+  @include media960 {
+    height: 70px;
+  }
+
+  &-wrap {
+    @include wrap;
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    @include media960 {
+      height: 70px;
+      justify-content: space-between;
+      @include wrap3;
+      max-width: 1100px;
+    }
+  }
+
+  &-log {
+    h1 {
+      color: $font-color;
+      font-size: 1.25rem;
+
+      @include media960 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &-nav {
+    display: none;
+
+    @include media960 {
+      display: block;
+
+      ul {
+        display: flex;
+        align-items: center;
+      }
+
+      a {
+        display: block;
+        margin-right: 36px;
+        color: $font-color;
+        transition: all .4s;
+
+        &:hover {
+          opacity: 0.4;
+        }
+      }
+
+      .button1 {
+        margin-right: 0;
+        @include btn;
+        width: 150px;
+        transition: all .4s;
+        &:hover {
+          background-color: $font-color2;
+        }
+      }
+    }
+  }
+}
+
+
+// ハンバーガー
+.button {
+  display: inline-block;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  @include media960 {
+    display: none;
+  }
+}
+
+.hamburger {
+  position: fixed;
+  top: 10px;
+  right: 6%;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0.5rem rgba(161, 161, 161, 0.5);
+  }
+}
+
+.hamburger__line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 24px;
+  height: 2px;
+  background-color: #333;
+  -webkit-transition: inherit;
+  transition: inherit;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    content: "";
+    -webkit-transition: inherit;
+    transition: inherit;
+  }
+}
+
+.hamburger__line::before {
+  top: -8px;
+}
+
+.hamburger__line::after {
+  top: 8px;
+}
+
+.hamburger[aria-expanded="true"] .hamburger__line {
+  background-color: transparent;
+
+  &::before,
+  &::after {
+    top: 0;
+    background-color: rgb(253, 253, 253);
+  }
+}
+
+.hamburger[aria-expanded="true"] .hamburger__line::before {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] .hamburger__line::after {
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.sp-global-menu {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  height: 100vh;
+  background-color: $base-color;
+  color: $font-color2;
+  visibility: hidden;
+
+  nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    ul li {
+      padding-bottom: 16px;
+      border-bottom: 1px solid #fff;
+      margin-bottom: 34px;
+      font-weight: 700;
+
+    }
+
+    ul li:nth-child(3) {
+      margin-bottom: 24px;
+    }
+
+    ul li:last-of-type {
+      border-bottom: none;
+
+        .touroku {
+          @include btn;
+          @include media768 {
+            font-size: 1.125rem;
+            width: 160px;
+            height: 44px;
+            line-height: 44px;
+          }
+
+          &:hover {
+            background-color: #fff;
+          }
+        }
+
+    }
+
+    a {
+      display: block;
+      color: $font-color2;
+
+      @include media768 {
+        font-size: (20rem/16);
+      }
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+  }
+}
+
+
+// ファーストビュー
+
+.top {
+  position: relative;
+  top: 60px;
+  height: 468px;
+  background-image: url(../image/bg1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  visibility: visible;
+  background-position: center;
+
+  @include media960 {
+    top: 70px;
+    height: 690px;
+  }
+
+  &-bc {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 468px;
+
+    @include media960 {
+      height: 690px;
+    }
+  }
+
+  &-wrap {
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  h2 {
+    color: $main-color;
+    font-size: 1.75rem;
+    text-align: center;
+    font-weight: 600;
+    padding-top: 48px;
+
+
+    @media (max-width: 374px) {
+      font-size: 7vw;
+    }
+
+    @include media768 {
+      font-size: 2rem;
+    }
+
+    @include media960 {
+      font-size: 3rem;
+      padding-top: 90px;
+
+      br {
+        display: none;
+      }
+    }
+  }
+
+  p:first-of-type {
+    font-size: 1.5rem;
+    color: $font-color2;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 24px;
+
+    @include media768 {
+      font-size: (28rem/16);
+    }
+
+    @include media960 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 45px;
+    }
+  }
+
+  h1 {
+    color: $font-color2;
+    font-size: 2rem;
+    text-align: center;
+
+    @include media768 {
+      font-size: 3rem;
+    }
+
+    @include media960 {
+      font-size: 4.5rem;
+      line-height: 1.1;
+    }
+  }
+
+  p:last-of-type {
+    color: $font-color2;
+    font-size: 1.125rem;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 40px;
+
+    @media (max-width: 374px) {
+      font-size: 0.825rem;
+    }
+
+    @include media768 {
+      font-size: 1.5rem;
+    }
+
+    @include media960 {
+      font-size: 2rem;
+      margin-top: 60px;
+    }
+  }
+
+  a {
+    @include btn;
+    font-size: 1.5rem;
+    width: 220px;
+    height: 50px;
+    line-height: 50px;
+    transition: all 0.6s;
+    &:hover {
+      background-color: $font-color2;
+    }
+    &:active {
+      transform: translateY(4px);
+    }
+
+    @include media960 {
+      width: 336px;
+      height: 90px;
+      line-height: 90px;
+      font-size: 2.25rem;
+    }
+  }
+
+}
+
+
+// 強み
+.strong {
+  margin-top: 60px;
+  background-color: $base-color;
+  padding-bottom: 64px;
+
+  @include media960 {
+    margin-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  &-wrap {
+    @include wrap;
+
+    @include media960 {
+      @include wrap3;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .subtitle {
+      @include subtitle;
+      color: $font-color2;
+      padding-bottom: 40px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        @include subtitle2;
+        padding-bottom: 64px;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition-duration: 1s;
+      transition-property: opacity, transform;
+    }
+
+    .fade-in-up {
+      transform: translate(0, 50px);
+    }
+
+    .scroll-in {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    @include media960 {
+      .cards {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+    }
+
+    .card1,
+    .card2 {
+      width: 100%;
+      max-width: 510px;
+      margin: 0 auto;
+      border: 1px solid $main-color;
+      padding: 18px 0 30px;
+
+      @include media960 {
+        width: 46%;
+        max-width: 510px;
+        padding: 18px 0 52px;
+      }
+    }
+
+
+    .card1 {
+      text-align: center;
+      margin-bottom: 36px;
+
+      @include media960 {
+        margin-bottom: 0;
+      }
+
+      .point {
+        display: inline-block;
+        color: $main-color;
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+
+        @include media768 {
+          font-size: 1.5rem;
+        }
+
+        @include media960 {
+          font-size: 2rem;
+          margin-bottom: 40px;
+        }
+      }
+
+      .point::after {
+        content: "1";
+        margin-left: 6px;
+        font-size: 1.5rem;
+
+        @include media768 {
+          font-size: 1.75rem;
+        }
+
+        @include media960 {
+          font-size: (36rem/16);
+        }
+      }
+
+      h2 {
+        color: $font-color2;
+        font-size: 1.25rem;
+
+        @include media768 {
+          font-size: 1.5rem;
+        }
+
+        @include media960 {
+          font-size: 2vw;
+        }
+      }
+
+      .number {
+        font-size: 1.75rem;
+
+        @include media768 {
+          font-size: 2rem;
+        }
+
+        @include media960 {
+          font-size: 2.4vw;
+        }
+      }
+    }
+
+    .card2 {
+      text-align: center;
+
+      .point {
+        color: $main-color;
+        display: inline-block;
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+
+        @include media768 {
+          font-size: 1.5rem;
+        }
+
+        @include media960 {
+          font-size: 2rem;
+          margin-bottom: 40px;
+        }
+      }
+
+      .point::after {
+        content: "1";
+        margin-left: 6px;
+        font-size: 1.5rem;
+
+        @include media768 {
+          font-size: 1.75rem;
+        }
+
+        @include media960 {
+          font-size: (36rem/16);
+        }
+      }
+
+      h2 {
+        color: $font-color2;
+        font-size: 1.25rem;
+
+        @include media768 {
+          font-size: 1.5rem;
+        }
+
+        @include media960 {
+          font-size: 2vw;
+        }
+      }
+    }
+  }
+}
+
+// マークラリーとは
+
+.info {
+  background-image: url(../image/bg2.png);
+  height: 440px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @include media960 {
+    height: 515px;
+  }
+
+  &-bg {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 440px;
+
+    @include media960 {
+      height: 515px;
+    }
+  }
+
+  &-wrap {
+    @include wrap;
+
+    @include media960 {
+      @include wrap3;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .subtitle {
+      @include subtitle;
+      color: $font-color2;
+      margin-bottom: 40px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        @include subtitle2;
+        margin-bottom: 64px;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition-duration: 1s;
+      transition-property: opacity, transform;
+    }
+
+    .fade-in-up {
+      transform: translate(0, 50px);
+    }
+
+    .scroll-in {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+
+    p {
+      color: $font-color2;
+      font-size: 1.25rem;
+
+      @include media768 {
+        font-size: 1.5rem;
+      }
+
+      @include media960 {
+        font-size: (28rem/16);
+        text-align: center;
+      }
+    }
+
+    p:first-of-type {
+      margin-bottom: 20px;
+
+      @include media960 {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}
+
+.flow {
+  background-color: $base-color;
+  padding-bottom: 64px;
+  text-align: center;
+
+  @include media960 {
+    padding-bottom: 80px;
+  }
+
+
+  .subtitle {
+    @include subtitle;
+    color: $font-color2;
+    margin-bottom: 36px;
+
+    @include media768 {
+      font-size: 1.75rem;
+    }
+
+    @include media960 {
+      @include subtitle2;
+      margin-bottom: 64px;
+    }
+  }
+
+
+  .fade-in {
+    opacity: 0;
+    transition-duration: 1s;
+    transition-property: opacity, transform;
+  }
+
+  .fade-in-up {
+    transform: translate(0, 50px);
+  }
+
+  .scroll-in {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  @include media960 {
+
+    .flow-wrap {
+      @include wrap3;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .flows {
+      display: flex;
+      justify-content: space-between;
+
+    }
+  }
+
+  &-card {
+    padding-bottom: 56px;
+
+    @include media960 {
+      padding-bottom: 90px;
+      text-align: center;
+      margin-right: 20px;
+    }
+
+    .number {
+      color: $main-color;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        font-size: (36rem/16);
+        margin-bottom: 40px;
+      }
+
+    }
+
+    img {
+      width: 70px;
+      height: 70px;
+
+      @include media960 {
+        width: 120px;
+        height: 120px;
+      }
+
+    }
+
+
+
+
+
+    h2 {
+      color: $font-color2;
+      font-size: 1.25rem;
+      margin-top: 32px;
+      margin-bottom: 18px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        font-size: (36rem/16);
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+    }
+
+
+
+    @include media960 {
+      .sukauto {
+        margin-top: 14px;
+        margin-bottom: 24px;
+      }
+    }
+
+    p:last-of-type {
+      font-size: 1.125rem;
+      color: $font-color2;
+      width: 60%;
+      margin: 0 auto;
+
+      @include media960 {
+        text-align: left;
+        width: auto;
+      }
+    }
+  }
+
+  &-card:last-of-type {
+    padding-bottom: 48px;
+
+    @include media960 {
+      padding-bottom: 64px;
+      text-align: center;
+      margin-right: 0;
+    }
+  }
+
+  a {
+    @include btn;
+    font-size: 1.5rem;
+    width: 220px;
+    height: 50px;
+    transition: all 0.6s;
+    line-height: 50px;
+    &:hover {
+      background-color: $font-color2;
+    }
+    @include media960 {
+      width: 336px;
+      height: 90px;
+      font-size: 2.25rem;
+      line-height: 90px;
+    }
+  }
+}
+
+//ご利用者の声
+
+.voice {
+  background-image: url(../image/bg3.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  height: 730px;
+
+  @include media960 {
+    height: 100%;
+  }
+
+  &-bg {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100%;
+
+    @include media960 {
+      padding-bottom: 40px;
+    }
+  }
+
+  &-wrap {
+    @include wrap;
+
+    @include media960 {
+      @include wrap3;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .subtitle {
+      @include subtitle;
+      color: $font-color2;
+      padding-bottom: 40px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        @include subtitle2;
+        margin-bottom: 64px;
+        padding-bottom: 0;
+      }
+    }
+
+    @include media960 {
+
+      .fade-in {
+        opacity: 0;
+        transition-duration: 1s;
+        transition-property: opacity, transform;
+      }
+
+      .fade-in-up {
+        transform: translate(0, 50px);
+      }
+
+      .scroll-in {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+
+    @include media960 {
+      .voice-inner {
+        background-color: #fff;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        height: 100%;
+        padding-top: 48px;
+        padding-bottom: 24px;
+        margin-bottom: 16px;
+      }
+
+    }
+
+    .voice-card {
+      background-color: #fff;
+      padding-top: 24px;
+      padding-bottom: 30px;
+
+      @include media960 {
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        margin: 0 auto;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: transparent;
+      }
+
+      .img {
+        text-align: center;
+
+        img{
+
+          width: 100px;
+          height: 100px;
+          @include media960{
+            width: 120px;
+            height: 120px;
+          }
+
+        }
+
+
+        @include media960 {
+          margin-right: 56px;
+        }
+      }
+
+      h3 {
+        margin-top: 40px;
+        font-size: 1.25rem;
+        font-weight: 400;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
+        line-height: 1.4;
+
+        .right-br {
+          display: none;
+        }
+
+        @include media960 {
+          font-size: (24rem/16);
+          width: 100%;
+          margin-top: 0;
+          margin-bottom: 16px;
+          margin-left: 0;
+          margin-right: 0;
+
+          .right-br2 {
+            display: none;
+          }
+
+          .right-br {
+            display: block;
+          }
+        }
+
+        span {
+          color: #e66343;
+        }
+      }
+
+      p {
+        width: 80%;
+        margin-bottom: 24px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.4;
+
+        br {
+          display: none;
+        }
+
+        @include media960 {
+          font-size: (18rem/16);
+          margin-bottom: 16px;
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+
+          br {
+            display: block;
+          }
+        }
+      }
+
+      .voice-button {
+        text-align: center;
+
+        @include media960 {
+          text-align: right;
+        }
+
+        .view {
+          color: $font-color2;
+          display: inline-block;
+          background-color: $base-color;
+          border-radius: 2px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+          width: 176px;
+          height: 44px;
+          text-align: center;
+          line-height: 44px;
+          outline: none;
+          border: none;
+          transition: all .4s;
+
+          &:hover {
+            color: $font-color;
+            background-color: #fff;
+          }
+        }
+
+      }
+
+
+
+
+    }
+  }
+}
+
+//よくあるご質問 アコーディオン
+
+.quest {
+  background-color: $base-color;
+  padding-bottom: 62px;
+
+  @include media960 {
+    padding-bottom: 70px;
+  }
+
+  &-accordion {
+    @include wrap;
+
+    @include media960 {
+      @include wrap3;
+      max-width: 568px;
+      margin: 0 auto;
+    }
+
+    .subtitle {
+      @include subtitle;
+      color: $font-color2;
+      padding-bottom: 40px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        @include subtitle2;
+        padding-bottom: 64px;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition-duration: 1s;
+      transition-property: opacity, transform;
+    }
+
+    .fade-in-up {
+      transform: translate(0, 50px);
+    }
+
+    .scroll-in {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .accordion-title {
+      color: $font-color2;
+      cursor: pointer;
+      border-bottom: 1px solid #fff;
+      padding: 16px;
+      padding-right: 30px;
+      padding-left: 18px;
+      padding-left: 2rem;
+      text-indent: -1.6rem;
+      position: relative;
+      transition: all .2s;
+
+
+
+      @include media768 {
+        font-size: (18rem/16);
+      }
+
+      @include media960 {
+        font-size: (18rem/16);
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    span {
+      color: $main-color;
+      margin-right: 14px;
+    }
+
+    .accordion-title::before,
+    .accordion-title::after {
+      content: "";
+      display: block;
+      background-color: #fff;
+      position: absolute;
+      top: 28px;
+      width: 20px;
+      height: 2px;
+      right: 0;
+    }
+
+    .accordion-title::after {
+      transform: rotate(90deg);
+      transition-duration: 0.3s;
+    }
+
+    .accordion-title.is-active::after {
+      transform: rotate(0);
+    }
+
+    .accordion-content {
+      display: none;
+      color: $font-color2;
+      padding: 16px;
+      padding-right: 30px;
+      padding-left: 18px;
+      padding-left: 2rem;
+      text-indent: -1.6rem;
+      opacity: 1;
+    }
+  }
+}
+
+//form
+
+.form {
+  background-color: #00243d;
+  padding-top: 54px;
+  padding-bottom: 50px;
+
+  @include media960 {
+    padding-top: 80px;
+    padding-bottom: 70px;
+  }
+
+  &-wrap {
+    @include wrap;
+    background-color: #fff;
+
+    @include media960 {
+      @include wrap3;
+      max-width: 1100px;
+    }
+
+    .subtitle {
+      @include subtitle;
+      color: $font-color;
+      padding-bottom: 56px;
+
+      @include media768 {
+        font-size: 1.75rem;
+      }
+
+      @include media960 {
+        @include subtitle2;
+        padding-top: 60px;
+      }
+    }
+
+    .inner {
+      width: 80%;
+      margin: 0 auto;
+
+      @include media960 {
+        max-width: 520px;
+      }
+    }
+
+    .item {
+      font-size: 1.125rem;
+      margin-bottom: 8px;
+
+      @include media768 {
+        font-size: (20rem/16);
+      }
+
+      @include media960 {
+        font-size: (24rem/16);
+        margin-bottom: 12px;
+      }
+    }
+
+    .item:last-of-type a {
+      color: $font-color;
+    }
+
+    .item:last-of-type a:hover {
+      opacity: 0.6;
+    }
+
+
+
+    input {
+      width: 100%;
+      height: 56px;
+      border: 1px solid rgb(179, 177, 177);
+      padding: 0 6px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      font-size: 1rem;
+
+
+      @include media768 {
+        font-size: 1rem;
+      }
+
+      @include media960 {
+        height: 60px;
+        font-size: 1rem;
+      }
+    }
+
+    .checkbox {
+      width: 12px;
+      height: 12px;
+      margin-right: 8px;
+    }
+
+    .alert {
+      color: $accent-color;
+      margin-bottom: 32px;
+    }
+
+    .alertEmail {
+      display: none;
+      &.show {
+        display: block;
+      }
+    }
+
+
+
+    .alert10{
+      display: none;
+      &.show {
+        display: block;
+      }
+    }
+
+
+    .a1,
+    .a2 {
+      margin-top: 32px;
+    }
+
+    .pass {
+      padding-left: 1rem;
+      text-indent: -1rem;
+      margin-bottom: 8px;
+      font-size: 0.875rem;
+
+      @include media960 {
+        font-size: 1rem;
+      }
+    }
+
+    .rules,
+    .privacy {
+      overflow-y: scroll;
+      border: 1px solid rgb(179, 177, 177);
+      height: 120px;
+
+      @include media960 {
+        height: 150px;
+      }
+    }
+
+    .rules {
+      margin-top: 18px;
+      padding: 24px 20px;
+      padding-top: 8px;
+      li {
+      list-style: none;
+      }
+
+      .rulesList {
+         margin-top: 24px;
+        h1 {
+        font-size: (16rem/16);
+      }
+
+      h2 {
+      margin-bottom: 8px;
+      font-size: (16rem/16);
+
+        }
+      }
+      .rulesInfo {
+         margin-left: 16px;
+        @include media960 {
+        margin-left: 24px;
+      }
+        p,li {
+      font-size: (16rem/16);
+        }
+      }
+    }
+
+    .privacy {
+      margin-top: 18px;
+      padding: 24px 20px;
+      padding-top: 8px;
+      li {
+      list-style: none;
+      }
+      .privacyList {
+      margin-top: 24px;
+
+      h1 {
+        font-size: (16rem/16);
+      }
+
+      h2 {
+      margin-bottom: 8px;
+      font-size: (16rem/16);
+
+    }
+      }
+      .privacyInfo {
+      margin-left: 16px;
+      @include media960 {
+        margin-left: 24px;
+      }
+      p,li {
+      font-size: (16rem/16);
+    }
+
+  }
+}
+
+    .button2 {
+      text-align: center;
+    }
+
+    button {
+      @include btn;
+      font-size: 1.5rem;
+      width: 200px;
+      height: 50px;
+      margin-top: 48px;
+      margin-bottom: 32px;
+
+      &:active {
+        background-color: #fff;
+        transform: translateY(2px);
+      }
+
+      @include media960 {
+        width: 360px;
+        height: 80px;
+        font-size: (32rem/16);
+      }
+    }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition-duration: 1s;
+    transition-property: opacity, transform;
+  }
+
+  .fade-in-up {
+    transform: translate(0, 50px);
+  }
+
+  .scroll-in {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+//footer {
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+
+  @include media960 {
+    height: 70px;
+  }
+
+  small {
+    color: #ccc;
+  }
+}

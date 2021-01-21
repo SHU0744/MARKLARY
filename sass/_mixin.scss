@@ -1,0 +1,57 @@
+$base-color:#080B1A;
+$main-color:#FFCE55;
+$accent-color:#E66343;
+$font-color:#333;
+$font-color2:#fff;
+
+@mixin wrap {
+  max-width: 84%;
+  margin: 0 auto;
+}
+
+@mixin wrap3 {
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+
+@mixin subtitle {
+  font-size: 1.5rem;
+  padding-top: 64px;
+  text-align: center;
+}
+
+@mixin  subtitle2 {
+  font-size: 2.5rem;
+  padding-top: 80px;
+}
+
+
+@mixin btn {
+  color: $font-color;
+  display: inline-block;
+  background-color :$main-color;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 0.825rem;
+  width: 158px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  outline: none;
+  border: none;
+}
+
+@mixin media768($width-media:768px) {
+  @media (min-width:$width-media) {
+    @content
+  }
+}
+
+
+@mixin media960($width-media2:960px) {
+  @media (min-width:$width-media2) {
+      @content
+  }
+}
